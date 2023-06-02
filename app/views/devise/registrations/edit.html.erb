@@ -51,6 +51,11 @@
     <%= f.label :company_income, style: "display: block" %>
     <%= f.date_field :company_income %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image, multiple: false, class: 'form-control' %>
+  </div>
 <%# end %>
 
   <div class="field">

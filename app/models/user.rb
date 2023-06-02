@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :applicants
   has_many :job, through: :applicants
 
+  has_one_attached :image
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

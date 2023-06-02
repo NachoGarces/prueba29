@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
-  before_action :require_admin, only: %i[edit create new update destroy]
+  before_action :require_admin, only: %i[ edit create new update destroy ]
+  before_action :auth_user
 
   # GET /jobs or /jobs.json
   def index
@@ -23,6 +24,8 @@ class JobsController < ApplicationController
   # POST /jobs or /jobs.json
   def create
     @job = Job.new(job_params)
+    @applicant = Applicant.new(user_id: current_user.id, job_id: @job.id)
+    @applicant.save
 
     respond_to do |format|
       if @job.save
@@ -70,6 +73,10 @@ class JobsController < ApplicationController
     end
 
     def require_admin
-      render jobs_path unless current_user.role == 'admin'
+      redirect_to jobs_path unless current_user.role == 'admin'
+    end
+
+    def auth_user
+      redirect_to shared_nolog_path unless user_signed_in?
     end
 end

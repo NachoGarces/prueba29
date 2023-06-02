@@ -2,9 +2,20 @@
 
 <%= render @job %>
 
-<div>
-  <%= link_to "Edit this job", edit_job_path(@job) %> |
-  <%= link_to "Back to jobs", jobs_path %>
+<% if current_user.role == 'admin' %>
+  
+  <div>
+    <%= link_to "Edit this job", edit_job_path(@job), class:'btn btn-light' %>
+    <%= link_to "Back to jobs", jobs_path, class:'btn btn-light' %>
 
-  <%= button_to "Destroy this job", @job, method: :delete %>
-</div>
+    <%= button_to "Destroy this job", @job, method: :delete, class:'btn btn-light m-2' %>
+  </div>
+
+<% else %>
+
+  <div>
+    <%= link_to "Postular", jobs_path, class:'btn btn-light' %>
+    <%= link_to "Back to jobs", jobs_path, class:'btn btn-light' %>
+  </div>
+
+<% end %>

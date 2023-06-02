@@ -84,3 +84,5 @@ gem "devise", "~> 4.9"
 gem "faker"
 
 gem 'rb-readline', '~> 0.5.5'
+
+gem 'aws-sdk-s3'
