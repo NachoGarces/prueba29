@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
+  before_action :require_admin, only: %i[edit create new update destroy]
 
   # GET /jobs or /jobs.json
   def index
@@ -66,5 +67,9 @@ class JobsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def job_params
       params.require(:job).permit(:position, :salary, :description)
+    end
+
+    def require_admin
+      render jobs_path unless current_user.role == 'admin'
     end
 end
