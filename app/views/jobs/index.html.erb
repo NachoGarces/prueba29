@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Jobs</h1>
+<% if user_signed_in? %>
+  <% if current_user.role = 'admin' %>
+    <%= link_to "New job", new_job_path %>
+  <% end %>
+<% end %>
+<hr>
+
+<div id="jobs">
+  <% @jobs.each do |job| %>
+    <%= render job %>
+    <p>
+      <%= link_to "Show this job", job %>
+    </p>
+  <% end %>
+</div>
